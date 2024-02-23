@@ -25,6 +25,7 @@ html {
     color: white;
     font-family: Helvetica, sans-serif;
     font-weight: bolder;
+    text-align: center;
 }
 #guides-list{
     height: calc(100% - 140px);
