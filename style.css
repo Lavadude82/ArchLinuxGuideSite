@@ -52,6 +52,32 @@ body {
     width: calc(100% - 25px);
     margin: 10px 0px 0px 0px;
     padding: 5px;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    border-radius: 5px;
+    max-width: 650px;
+    font-size: 20px;
+    transition: background 0.2s;
+    cursor: pointer;
+    
+}
+
+#guides-list>li > a:hover {
+ background:  rgb(45, 138, 179);
+ 
+}
+
+#guides-list>li>a {
+    
+    text-decoration: none;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    width: calc(100% - 25px);
+    margin: 10px 0px 0px 0px;
+    padding: 5px;
     background: rgb(5, 72, 99);
     display: flex;
     align-items: center;
@@ -63,17 +89,6 @@ body {
     transition: background 0.2s;
     cursor: pointer;
     border: 2px solid  rgb(45, 138, 179);
-}
-
-#guides-list>li:hover {
- background:  rgb(45, 138, 179);
-}
-
-#guides-list>li>a {
-    text-decoration: none;
-    color: white;
-    font-family: Helvetica, sans-serif;
-    
 }
 
 #extra {
