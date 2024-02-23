@@ -104,7 +104,8 @@ border-radius: 10px;
     transition: scale 0.1s;
 }
 #extra > *:hover{
-    scale:90%
+    scale:90%;
+    filter:brightness(85%);
 }
 #extra > *:active{
     scale:80%
