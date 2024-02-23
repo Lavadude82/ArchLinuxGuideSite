@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base Install (With Grub EFI, No LVM)</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../scrollbar.css">
+</head>
+
+<body>
+  <ul id="instruction_list">
+    1.0 - Setup for Installation
+    <li>
+      1.1 - Get a ISO/Disk Image<p>Let's get an ISO first. You can do this by clicking the arch icon with a down arrow
+        in the home page. It takes
+        you to the <a href="https://archlinux.org">Arch linux</a> website download page. Scroll down and select a mirror
+        based on your location for a faster download. Choose any URL below your mirror selection and click it. Then
+        click a file with the <bold>archlinux-YYYY.DD.MM-x86_64.iso</bold> format (doesn't have to be the same day as
+        today).</p>
+    </li>
+    <li>
+      1.2 - Flash ISO/Disk Image using Etcher or Ventoy<p> Let's get a flashing tool, <a
+          href="https://etcher.balena.io">Etcher</a> is really simple to use. <a href="https://ventoy.net">Ventoy</a>
+        allows you to have multiple ISO/Disk Images on your usb at once. You can choose one, they will both be explained
+        here and are linked in the home page.
+        <br><br>
+        <bold-big>Etcher</bold-big><br>
+        Etcher can be downloaded from <a href="https://etcher.balena.io">Etcher's site</a>. Once opened, click select
+        image and browse for the ISO/Disk Image you've downloaded. Now plug in your USB Flash Drive and
+        click select drive, it should appear on the list. If so, select your USB (<red>BE CARFUL TO SELECT THE CORRECT
+          DRIVE AS THE DRIVE SELECTED WILL BE ERASED</red>). Then click flash and wait, etcher will tell you when it is
+        done. At this point you may remove your Flash Drive and follow to the next step (<bold>2.1</bold>).
+        <br><br>
+        <bold-big>Ventoy</bold-big><br>
+        Ventoy can be downloaded from <a href="https://ventoy.net">Ventoy's site</a>. Once opened, plug in your USB
+        Flash Drive and click the dropdown below <bold>Device</bold>. Select your USB Flash Drive from the list (<red>BE
+          CARFUL TO
+          SELECT THE CORRECT DRIVE AS THE DRIVE SELECTED WILL BE ERASED</red>). Now click install, and ventoy will let
+        you know when it's done. After it is done, open your file explorer and look for a partition (or a device that
+        shows up as a USB Drive) called <bold>Ventoy</bold>. Once located, copy the ISO/Disk Image to the partition.
+        Once done unplug your USB, and follow to the
+        next step (<bold>2.1</bold>).
+      </p>
+    </li>
+    <split></split>
+    2.0 - Boot & Partitioning
+    <li>
+      2.1 - Boot from ISO/Disk Image<p>
+        <yellow>Make sure you know how to access the boot menu of your computer!</yellow>
+        <red>YOU NEED TO DISABLE SECURE BOOT!</red> Fully shutdown your computer
+        and plug your USB Flash Drive into your computer. Access your boot menu by tapping the key your manufacturer
+        set. Then select your USB Flash Drive and click Enter or Boot. <bold>For ventoy click enter two more times.
+        </bold> You are now booting into the Arch Linux Live ISO/Disk Image. Once you see something similar to <bold>
+          [root@archiso root]#</bold>, you may proceed to the next step (<bold>2.2</bold>).
+      </p>
+    </li>
+    <li>
+      2.2 - Partitioning Drive<p>
+        Let's start making the base of your system. Run <bold>fdisk /dev/sda</bold><br>
+        <yellow>This is NOT a dual-boot tutorial!</yellow> Now type <bold>g</bold> and hit enter (If any popup appears,
+        click y, <red>THIS WILL REMOVE YOUR DEVICE'S SIGNATURES!</red>). We have an empty GPT partition table now. Let's
+        add partitions. Type <bold>n</bold> and click enter three times, then type <bold>+500M</bold> and click enter.
+        Type <bold>t</bold> and click enter, then <bold>1</bold> and click enter. This will be our EFI partition. Let's
+        make
+        our main partition. Type <bold>n</bold> and click enter four times. Now type <bold>w</bold> and click enter.
+        We've made our partitions, let's move to formatting and pacstrap (<bold>3.0</bold>).
+      </p>
+    </li>
+    <split></split>
+    3.0 - Formatting and Pacstrapping
+    <li>
+      3.1 - Formatting partitions
+      <p>Let's begin by formatting our boot partition. Our boot partiton is <bold>/dev/<italic>drive</italic>1</bold>
+        <br><br>Replace <bold>drive</bold> with your drive <br>Examples: <br>
+        <bold>sda</bold><br>
+        <bold>mmcblk0</bold> (needs a <bold>p</bold> for partition between device and number)<br>
+        <bold>nvme0n1</bold> <br><br>Run <bold>mkfs.fat -F32 /dev/<italic>
+            drive</italic>1</bold>, if any prompts, type y and click enter. Let's format our main partition, run <bold>
+          mkfs.ext4 /dev/<italic>drive</italic>2</bold>, if any prompts, type y and click enter. After that, we can
+        move to our next step (<bold>3.2</bold>).
+      </p>
+    </li>
+    <li>
+      3.2 - Mounting and Pacstrapping
+      <p>Run <bold>mount /dev/<italic>drive</italic>2 /mnt</bold> and <bold>mount --mkdir /dev/<italic>drive</italic>1
+          /mnt/boot</bold>. <br> Let's connect to wifi, <yellow>if you are using ethernet, skip this step</yellow> -
+        <br><br>
+        Run <bold>iwctl</bold> and type <bold>station wlan0 connect <italic>WifiName</italic>
+        </bold> (replace <bold>WifiName</bold> with your WifiName/SSID) then it will prompt you for a password if
+        required. After you entered your password type exit and hit enter. To test your wifi type <bold>ping google.com
+        </bold>, if it says <bold>ping: google.com: Temporary failure in name resolution</bold>, retry this from the Run iwctl step.
+        <br>
+        <br>Let's get a base system with pacstrap, run <bold>pacstrap -K /mnt base linux-lts linux-firmware grub
+          efibootmgr</bold>
+      </p>
+    </li>
+  </ul>
+</body>
+
+</html>
