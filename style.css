@@ -37,7 +37,7 @@ html {
 #extra{
     position: absolute;
     bottom:0px;
-    width: calc(100% - 10px);
+    width: auto;
     height:60px;
     background: rgb(48, 48, 48);
     display: flex;
