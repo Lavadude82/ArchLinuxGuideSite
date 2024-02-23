@@ -100,13 +100,14 @@ border-radius: 10px;
     margin-inline: 60px;
 }
 #extra > *{
+    scale:85%;
     transition: scale 0.1s;
 }
 #extra > *:hover{
-    scale:108%
+    scale:90%
 }
 #extra > *:active{
-    scale:85%
+    scale:80%
 }
 #pacman{
     position: fixed;
