@@ -62,7 +62,7 @@ body {
     font-size: 20px;
     transition: background 0.2s;
     cursor: pointer;
-    border: 2px solid rgb(9, 89, 109)
+    border: 2px solid  rgb(45, 138, 179);
 }
 
 #guides-list>li:hover {
